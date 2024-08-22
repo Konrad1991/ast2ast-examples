@@ -116,11 +116,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pso</span>(<span class="fu">rep</span>(lb, <span class="dv">3</span>), <span class="fu">rep</span>(ub, <span class="dv">3</span>), rosenbrock, <span class="dv">10000</span>, npop, error_threshold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$insilico
-[1] 7.218289e-08
+[1] 6.935181e-08
 
 $global_best_vec
-          [,1]      [,2]     [,3]
-[1,] 0.9999297 0.9998544 0.999688</code></pre>
+         [,1]     [,2]     [,3]
+[1,] 1.000017 1.000027 1.000078</code></pre>
 </div>
 </div>
 </section>
@@ -154,11 +154,11 @@ $global_best_vec
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pso_xptr</span>(<span class="fu">rep</span>(lb, <span class="dv">3</span>), <span class="fu">rep</span>(ub, <span class="dv">3</span>), rosenbrock_cpp, <span class="dv">1000</span>, npop, error_threshold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$insilico
-[1] 6.998632e-08
+[1] 3.387375e-08
 
 $global_best_vec
-         [,1]     [,2]     [,3]
-[1,] 1.000094 1.000177 1.000341</code></pre>
+          [,1]      [,2]      [,3]
+[1,] 0.9999178 0.9998369 0.9996721</code></pre>
 </div>
 </div>
 </section>
@@ -185,8 +185,8 @@ $global_best_vec
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
       expr      min       lq     mean   median       uq      max neval cld
-   r_fct() 47.63846 48.90109 50.66235 50.73795 51.09927 56.74526   100  a 
- cpp_fct() 13.38626 13.56410 13.79819 13.67347 13.85318 15.48170   100   b</code></pre>
+   r_fct() 49.15161 51.78837 53.57326 52.37645 55.01028 68.31928   100  a 
+ cpp_fct() 13.60880 13.85153 14.28999 14.00231 14.62342 18.03510   100   b</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
