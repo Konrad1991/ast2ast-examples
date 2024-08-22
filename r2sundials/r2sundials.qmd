@@ -50,7 +50,7 @@ In this code, we first load the `translate.R` script, which contains the `R2cpp`
 function from the `ast2ast` package.
 Then we define the time points at which we want to solve the ODE, the initial condition, 
 and the parameter 'a'.
-The ODE system is defined in the `ode` function, which is then translated to C++ code using `R2cpp`.
+The ODE system is defined in the `ode` function, which is then translated to C++ code using `ast2ast`.
 
 ## Solving the ODE System
 
