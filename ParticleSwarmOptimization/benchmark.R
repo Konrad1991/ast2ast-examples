@@ -38,17 +38,17 @@ rosenbrock_cpp <- ast2ast::translate(rosenbrock_cpp,
   verbose = TRUE
 )
 
-pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 10000, npop, error_threshold)
+pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 1000, npop, error_threshold)
 
 
 r_fct <- function() {
   set.seed(1234)
-  pso(rep(lb, 3), rep(ub, 3), rosenbrock, 10000, npop, error_threshold)
+  pso(rep(lb, 3), rep(ub, 3), rosenbrock, 1000, npop, error_threshold)
 }
 
 cpp_fct <- function() {
   set.seed(1234)
-  pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 10000, npop, error_threshold)
+  pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 1000, npop, error_threshold)
 }
 
 res <- microbenchmark::microbenchmark(
@@ -56,5 +56,7 @@ res <- microbenchmark::microbenchmark(
   cpp_fct()
 )
 res
-
+getwd()
+pdf("RosenbrockBenchmark.pdf")
 boxplot(res)
+dev.off()
