@@ -1,0 +1,101 @@
+# Optimizing R Code Performance: A Case Study Using Particle Swarm Optimization and the Rosenbrock Function
+
+In this tutorial, we will demonstrate how to use the `ast2ast` package
+to translate R functions into C++ functions.
+We will use a Particle Swarm Optimization (PSO) algorithm on the Rosenbrock function as an example.
+The PSO algorithm calls the loss function many times,
+so using a compiled function instead of a native R function can significantly speed up the computation.
+
+## Step 1: Compile the particle swarm Optimization algorithm
+
+First, we compile the C++ file containing the [PSO code](https://github.com/Konrad1991/ast2ast-examples/tree/main/ParticleSwarmOptimization/PSO.cpp).
+
+```{r}
+Rcpp::sourceCpp("PSO.cpp")
+```
+
+## Step 2: Defining the Rosenbrock function in R
+
+Next, we define the Rosenbrock function in R. This function will be used as the loss function in our PSO algorithm.
+
+```{r}
+rosenbrock <- function(parameter) {
+  value <- 0
+  for (i in 1:(length(parameter) - 1)) {
+    value <- value +
+      100 * (parameter[i + 1] - parameter[i]^2)^2 +
+      (1 - parameter[i])^2
+  }
+  return(value)
+}
+```
+
+## Step 3: Running the PSO algorithm with the R function
+
+We then run the PSO algorithm with the Rosenbrock function defined in R.
+
+```{r}
+lb <- -10000
+ub <- 10000
+error_threshold <- 0.0000001
+npop <- 40
+
+pso(rep(lb, 3), rep(ub, 3), rosenbrock, 10000, npop, error_threshold)
+```
+
+## Step 4: Translating the R function to C++ with ast2ast
+
+Now, we use `ast2ast` to translate the Rosenbrock function from R to C++. 
+
+```{r}
+rosenbrock_cpp <- function(parameter) {
+  value::double <- 0
+  sz::int <- length(parameter)
+  for (i in 1:(sz - 1)) {
+    value <- value +
+      100 * (parameter[i + 1] - parameter[i]^2)^2 +
+      (1 - parameter[i])^2
+  } 
+  return(value)
+}
+
+rosenbrock_cpp <- ast2ast::translate(rosenbrock_cpp,
+  output = "XPtr",
+  handle_inputs = "",
+  references = TRUE,
+  verbose = FALSE
+)
+```
+
+## Step 5: Running the PSO algorithm with the C++ function
+
+We can now run the PSO algorithm with the Rosenbrock function defined in C++.
+
+```{r}
+pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 1000, npop, error_threshold)
+```
+
+## Step 6: Benchmarking the R and C++ functions
+
+Finally, we benchmark the performance of the R and C++ functions using the `microbenchmark` package.
+
+```{r}
+r_fct <- function() {
+  set.seed(1234)
+  pso(rep(lb, 3), rep(ub, 3), rosenbrock, 1000, npop, error_threshold)
+}
+
+cpp_fct <- function() {
+  set.seed(1234)
+  pso_xptr(rep(lb, 3), rep(ub, 3), rosenbrock_cpp, 1000, npop, error_threshold)
+}
+
+res <- microbenchmark::microbenchmark(
+  r_fct(),
+  cpp_fct()
+)
+
+res
+plot(res)
+```
+
