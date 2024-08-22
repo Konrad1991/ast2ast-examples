@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>odecpp <span class="ot">&lt;-</span> <span class="fu">R2cpp</span>(ode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In this code, we first load the <code>translate.R</code> script, which contains the <code>R2cpp</code> function from the <code>ast2ast</code> package. Then we define the time points at which we want to solve the ODE, the initial condition, and the parameter ‘a’. The ODE system is defined in the <code>ode</code> function, which is then translated to C++ code using <code>ast2ast</code>.</p>
+<p>In this code, we first load the <code>translate.R</code> script, which contains the <code>R2cpp</code> function defined in the same directory as this tutorial. Then we define the time points at which we want to solve the ODE, the initial condition, and the parameter ‘a’. The ODE system is defined in the <code>ode</code> function, which is then translated to C++ code using <code>ast2ast</code>.</p>
 </section>
 <section id="solving-the-ode-system" class="level2">
 <h2 class="anchored" data-anchor-id="solving-the-ode-system">Solving the ODE System</h2>
@@ -149,9 +149,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-       expr     min       lq     mean  median       uq     max neval cld
- r2sundials 475.372 488.0205 523.6371 510.698 521.2880 694.813   100  a 
-    ast2ast 240.361 245.7560 257.1344 253.055 257.8935 319.779   100   b</code></pre>
+       expr     min       lq     mean   median       uq     max neval cld
+ r2sundials 481.123 505.4385 549.7377 526.3220 558.0015 738.285   100  a 
+    ast2ast 241.924 248.4260 262.4030 256.7115 265.5225 346.410   100   b</code></pre>
 </div>
 <details>
 <summary>Code</summary>

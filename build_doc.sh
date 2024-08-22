@@ -2,7 +2,7 @@
 
 
 quarto render ./r2sundials/r2sundials.qmd
-mv  ./r2sundials/r2sundials.html ./docs/r2sundials.html.html
+mv  ./r2sundials/r2sundials.html ./docs/r2sundials.html
 sudo rm -r ./docs/r2sundials_files/
 sudo mv ./r2sundials/r2sundials_files ./docs/r2sundials_files/
 
